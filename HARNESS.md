@@ -35,6 +35,10 @@
 
 직접 `review`를 호출하면 한 번만 검토하고 결과를 반환합니다. 자동 수정 반복은 `orchestrator`의 책임입니다.
 
+### `pr-walkthrough`
+
+GitHub PR이나 로컬 브랜치 diff를 사람 리뷰어가 빠르게 이해할 수 있도록 읽기 전용 워크스루(TL;DR, Mermaid 흐름도, 의존성 순서 가이드 투어, 위험 태그 핫스팟, 미검증 갭)를 Antigravity Markdown 아티팩트로 작성합니다. `review`의 승인 판정을 대체하거나 코드를 수정하지 않으며, `gh pr comment` 게시도 사용자가 명시적으로 요청할 때만 수행합니다.
+
 ### `release`
 
 사용자가 명시적으로 요청한 경우에만 `documenter`, 커밋, 푸시, PR 준비를 수행합니다. 리뷰를 우회하거나 자동으로 머지하지 않습니다.

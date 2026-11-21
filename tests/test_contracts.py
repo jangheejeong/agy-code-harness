@@ -13,7 +13,7 @@ AGENTS = {
     "explorer": ("gemini-4-argon-medium", "sandbox"),
     "documenter": ("gemini-4-argon-low", "off"),
 }
-SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator")
+SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator", "pr-walkthrough")
 
 
 def frontmatter(path):
@@ -47,6 +47,18 @@ class ContractTests(unittest.TestCase):
                 self.assertIn("do not", description)
         release = frontmatter(ROOT / ".agents/skills/release/SKILL.md")
         self.assertIn("explicit user invocation", release["description"])
+
+    def test_pr_walkthrough_skill_and_reference_template_contract(self):
+        skill_path = ROOT / ".agents/skills/pr-walkthrough/SKILL.md"
+        template_path = ROOT / ".agents/skills/pr-walkthrough/references/walkthrough-template.md"
+        self.assertTrue(template_path.is_file())
+        skill_text = skill_path.read_text()
+        self.assertLessEqual(len(skill_text.splitlines()), 60)
+        self.assertIn("./references/walkthrough-template.md", skill_text)
+        metadata = frontmatter(skill_path)
+        self.assertEqual(metadata["name"], "pr-walkthrough")
+        self.assertIn("Use", metadata["description"])
+        self.assertIn("do not", metadata["description"])
 
     def test_review_has_four_lenses_and_one_retry_owner(self):
         reviewer = (ROOT / ".agents/agents/reviewer.md").read_text()
@@ -85,6 +97,7 @@ class ContractTests(unittest.TestCase):
         active = [ROOT / ".agents/hooks.json"]
         active.extend(ROOT.glob(".agents/agents/*.md"))
         active.extend(ROOT.glob(".agents/skills/*/SKILL.md"))
+        active.extend(ROOT.glob(".agents/skills/*/references/*.md"))
         source = "\n".join(path.read_text() for path in active)
         for forbidden in (
             "CLAUDE_PROJECT_DIR",
@@ -108,6 +121,7 @@ class ContractTests(unittest.TestCase):
             "네 관점",
             "3",
             "~/.gemini/config",
+            "pr-walkthrough",
         ):
             self.assertIn(expected, source)
         self.assertLessEqual(len((ROOT / "README.md").read_text().splitlines()), 110)

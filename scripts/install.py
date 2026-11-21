@@ -13,7 +13,7 @@ from typing import Dict, List, Optional, Tuple
 
 
 AGENTS = ("explorer", "planner", "coder", "tester", "reviewer", "documenter")
-SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator")
+SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator", "pr-walkthrough")
 SAFETY_HOOKS = ("block-destructive", "protect-secrets")
 HOOK_GROUP_NAME = "agy-harness-safety"
 
@@ -39,11 +39,41 @@ def exact_file_match(path: Path, source: Path) -> bool:
 
 
 def exact_skill_dir_match(path: Path, source: Path) -> bool:
-    if not path.is_dir() or path.is_symlink():
+    if not path.is_dir() or path.is_symlink() or not source.is_dir() or source.is_symlink():
         return False
-    children = list(path.iterdir())
-    skill_file = path / "SKILL.md"
-    return children == [skill_file] and exact_file_match(skill_file, source / "SKILL.md")
+
+    def collect_tree(root: Path) -> Optional[Dict[Path, Path]]:
+        entries: Dict[Path, Path] = {}
+        stack = [root]
+        while stack:
+            current = stack.pop()
+            for child in current.iterdir():
+                if child.is_symlink():
+                    return None
+                rel = child.relative_to(root)
+                if child.is_dir():
+                    entries[rel] = child
+                    stack.append(child)
+                elif child.is_file():
+                    entries[rel] = child
+                else:
+                    return None
+        return entries
+
+    path_entries = collect_tree(path)
+    source_entries = collect_tree(source)
+    if path_entries is None or source_entries is None:
+        return False
+    if set(path_entries) != set(source_entries):
+        return False
+    for rel, source_entry in source_entries.items():
+        path_entry = path_entries[rel]
+        if source_entry.is_dir():
+            if not path_entry.is_dir():
+                return False
+        elif not exact_file_match(path_entry, source_entry):
+            return False
+    return True
 
 
 def managed_destination(destination: Path, source: Path, kind: str) -> bool:
