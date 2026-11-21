@@ -1,7 +1,7 @@
 ---
 name: tester
 description: Independently verifies a changed phase with focused regression and edge-case tests. Use when behavior or risk justifies a separate test pass; do not use when existing focused checks already cover a trivial change.
-model: inherit
+model: gemini-4-neon-high
 subagent: true
 mainAgent: false
 commandExecutionPolicy: sandbox

@@ -27,18 +27,19 @@ plan → work → review → release
 
 같은 지적이 반복되거나, 결과가 불명확하거나, 세 번째 리뷰에서도 승인되지 않으면 자동 진행을 멈추고 사용자에게 보고합니다.
 
-## 모델과 실행 정책
+## 모델과 실행 정책 (Gemini 4)
 
 | 역할 | 모델 (`model`) | 명령 정책 (`commandExecutionPolicy`) | 주 역할 |
 |---|---|---|---|
-| planner | `pro` | `off` | 요구사항·위험·인수 기준 판단 |
-| reviewer | `pro` | `sandbox` | 독립 4관점 리뷰 |
-| coder | `inherit` | `sandbox` | 승인된 Phase 구현 |
-| tester | `inherit` | `sandbox` | 선택적 독립 검증 |
-| explorer | `flash` | `sandbox` | 읽기 전용 코드 탐색 |
-| documenter | `flash` | `off` | 검증된 동작의 문서 동기화 |
+| 메인(새 세션 권장) | `gemini-4-neon-medium` | - | 사용자와 작업 조율, 작은 작업 직접 처리 |
+| planner | `gemini-4-carbon-high` | `off` | 요구사항·위험·인수 기준 판단 |
+| reviewer | `gemini-4-carbon-high` | `sandbox` | 독립 4관점 리뷰 |
+| coder | `gemini-4-neon-high` | `sandbox` | 승인된 Phase 구현 |
+| tester | `gemini-4-neon-high` | `sandbox` | 선택적 독립 검증 |
+| explorer | `gemini-4-argon-medium` | `sandbox` | 읽기 전용 코드 탐색 |
+| documenter | `gemini-4-argon-low` | `off` | 검증된 동작의 문서 동기화 |
 
-판단 오류의 비용이 큰 역할에 `pro`를 쓰고, 구현·검증은 현재 세션 모델(`inherit`)을 따릅니다. 탐색과 문서화는 `flash`로 지연과 토큰을 줄입니다. CLI/App/IDE 간 도구명 불일치로 인한 서브에이전트 정지를 피하기 위해 `tools` 화이트리스트는 생략하고 `commandExecutionPolicy`와 시스템 프롬프트로 경계를 강제합니다.
+판단 오류의 비용이 큰 역할에 **Gemini 4 Carbon (High)** 을 쓰고, 구현·검증에는 **Gemini 4 Neon (High)** 을 사용합니다. 탐색과 문서화는 **Gemini 4 Argon (Medium/Low)** 으로 지연과 토큰을 줄입니다. CLI/App/IDE 간 도구명 불일치로 인한 서브에이전트 정지를 피하기 위해 `tools` 화이트리스트는 생략하고 `commandExecutionPolicy`와 시스템 프롬프트로 경계를 강제합니다.
 
 ## 설치
 

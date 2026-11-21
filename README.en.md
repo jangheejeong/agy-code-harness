@@ -25,16 +25,17 @@ plan → work → review → release
 - `release`: Prepares docs, commit, push, or PR only on explicit user request.
 - `orchestrator`: Coordinates end-to-end work and at most 3 review attempts including the first.
 
-## Subagent Routing
+## Subagent Routing (Gemini 4)
 
 | Role | Model (`model`) | Execution Policy (`commandExecutionPolicy`) | Purpose |
 |---|---|---|---|
-| planner | `pro` | `off` | Scope, risks, and acceptance criteria |
-| reviewer | `pro` | `sandbox` | Independent 4-lens review |
-| coder | `inherit` | `sandbox` | Implement one approved phase |
-| tester | `inherit` | `sandbox` | Optional independent verification |
-| explorer | `flash` | `sandbox` | Read-only codebase discovery |
-| documenter | `flash` | `off` | Verified documentation sync |
+| Main (recommended) | `gemini-4-neon-medium` | - | Coordination and small direct edits |
+| planner | `gemini-4-carbon-high` | `off` | Scope, risks, and acceptance criteria |
+| reviewer | `gemini-4-carbon-high` | `sandbox` | Independent 4-lens review |
+| coder | `gemini-4-neon-high` | `sandbox` | Implement one approved phase |
+| tester | `gemini-4-neon-high` | `sandbox` | Optional independent verification |
+| explorer | `gemini-4-argon-medium` | `sandbox` | Read-only codebase discovery |
+| documenter | `gemini-4-argon-low` | `off` | Verified documentation sync |
 
 ## Install
 

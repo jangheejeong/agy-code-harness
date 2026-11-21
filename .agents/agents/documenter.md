@@ -1,7 +1,7 @@
 ---
 name: documenter
 description: Synchronizes user-facing documentation with implemented and verified behavior. Use only when the approved change affects docs; do not use for code changes or speculative design.
-model: flash
+model: gemini-4-argon-low
 subagent: true
 mainAgent: false
 commandExecutionPolicy: off

@@ -6,12 +6,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 AGENTS = {
-    "planner": ("pro", "off"),
-    "reviewer": ("pro", "sandbox"),
-    "coder": ("inherit", "sandbox"),
-    "tester": ("inherit", "sandbox"),
-    "explorer": ("flash", "sandbox"),
-    "documenter": ("flash", "off"),
+    "planner": ("gemini-4-carbon-high", "off"),
+    "reviewer": ("gemini-4-carbon-high", "sandbox"),
+    "coder": ("gemini-4-neon-high", "sandbox"),
+    "tester": ("gemini-4-neon-high", "sandbox"),
+    "explorer": ("gemini-4-argon-medium", "sandbox"),
+    "documenter": ("gemini-4-argon-low", "off"),
 }
 SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator")
 
@@ -100,7 +100,15 @@ class ContractTests(unittest.TestCase):
     def test_user_docs_are_lean_and_match_the_active_contract(self):
         docs = [ROOT / "README.md", ROOT / "README.en.md", ROOT / "HARNESS.md"]
         source = "\n".join(path.read_text() for path in docs)
-        for expected in ("pro", "inherit", "flash", "네 관점", "3", "~/.gemini/config"):
+        for expected in (
+            "gemini-4-carbon-high",
+            "gemini-4-neon-high",
+            "gemini-4-argon-medium",
+            "gemini-4-argon-low",
+            "네 관점",
+            "3",
+            "~/.gemini/config",
+        ):
             self.assertIn(expected, source)
         self.assertLessEqual(len((ROOT / "README.md").read_text().splitlines()), 110)
         self.assertLessEqual(len((ROOT / "HARNESS.md").read_text().splitlines()), 150)

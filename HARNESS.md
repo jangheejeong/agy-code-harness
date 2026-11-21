@@ -57,16 +57,17 @@
 
 ---
 
-## 서브에이전트 설정
+## 서브에이전트 설정 (Gemini 4)
 
 | 에이전트 | 모델 | 명령 정책 | 주 역할 |
 |---|---|---|---|
-| planner | `pro` | `off` | 요구사항·위험·인수 기준 판단 |
-| reviewer | `pro` | `sandbox` | 독립 4관점 리뷰 |
-| coder | `inherit` | `sandbox` | 승인된 Phase 구현 |
-| tester | `inherit` | `sandbox` | 선택적 독립 검증 |
-| explorer | `flash` | `sandbox` | 읽기 전용 코드 탐색 |
-| documenter | `flash` | `off` | 검증된 동작의 문서 동기화 |
+| 메인(권장) | `gemini-4-neon-medium` | - | 사용자와 작업 조율, 작은 작업 직접 처리 |
+| planner | `gemini-4-carbon-high` | `off` | 요구사항·위험·인수 기준 판단 |
+| reviewer | `gemini-4-carbon-high` | `sandbox` | 독립 4관점 리뷰 |
+| coder | `gemini-4-neon-high` | `sandbox` | 승인된 Phase 구현 |
+| tester | `gemini-4-neon-high` | `sandbox` | 선택적 독립 검증 |
+| explorer | `gemini-4-argon-medium` | `sandbox` | 읽기 전용 코드 탐색 |
+| documenter | `gemini-4-argon-low` | `off` | 검증된 동작의 문서 동기화 |
 
 서브에이전트 프롬프트에는 역할과 금지사항만 둡니다. 프로젝트 규칙과 인수 기준은 호출할 때 필요한 부분만 전달해 반복 토큰을 줄입니다.
 

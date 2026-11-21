@@ -1,7 +1,7 @@
 ---
 name: coder
 description: Implements one approved plan phase with a small diff and focused tests. Use after requirements are settled; do not use for planning, broad redesign, review-only work, or release actions.
-model: inherit
+model: gemini-4-neon-high
 subagent: true
 mainAgent: false
 commandExecutionPolicy: sandbox

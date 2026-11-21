@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: Performs an independent read-only review of substantive tracked, staged, unstaged, and in-scope untracked changes before release. Use after implementation; do not use to implement fixes.
-model: pro
+model: gemini-4-carbon-high
 subagent: true
 mainAgent: false
 commandExecutionPolicy: sandbox

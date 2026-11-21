@@ -1,7 +1,7 @@
 ---
 name: planner
 description: Turns approved requirements into measurable, phased acceptance criteria before substantive implementation. Use for features, refactors, and non-trivial fixes; do not use for a small direct edit or review-only request.
-model: pro
+model: gemini-4-carbon-high
 subagent: true
 mainAgent: false
 commandExecutionPolicy: off

@@ -1,7 +1,7 @@
 ---
 name: explorer
 description: Maps relevant code, conventions, dependencies, and risks before a non-trivial change. Use for bounded read-only discovery; do not use for implementation or simple file lookup.
-model: flash
+model: gemini-4-argon-medium
 subagent: true
 mainAgent: false
 commandExecutionPolicy: sandbox
