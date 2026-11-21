@@ -69,6 +69,10 @@ class ContractTests(unittest.TestCase):
             "Performance and operability",
         ):
             self.assertIn(lens, reviewer)
+        coder = (ROOT / ".agents/agents/coder.md").read_text()
+        self.assertIn("SLAP", coder)
+        self.assertIn("Stepdown", coder)
+        self.assertIn("SLAP/Stepdown", reviewer)
         review = (ROOT / ".agents/skills/review/SKILL.md").read_text()
         orchestrator = (ROOT / ".agents/skills/orchestrator/SKILL.md").read_text()
         self.assertIn("one read-only pass", review)
