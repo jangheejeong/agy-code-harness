@@ -1,0 +1,15 @@
+# Project instructions (`AGENTS.md` / `GEMINI.md`)
+
+## Harness workflow
+
+- Use the `plan` skill when scope, risks, or acceptance criteria are not settled.
+- Use the `work` skill for one approved implementation phase.
+- Use the `review` skill for one independent four-lens review.
+- Use the `release` skill only when the user asks to prepare a reviewed change for delivery.
+- Use the `orchestrator` skill for non-trivial end-to-end coordination and at most three review attempts including the first.
+
+Small changes stay in the main conversation. `tester` and `documenter` subagents are optional. Repository-specific rules and commands belong below this section; do not duplicate the subagent prompt files here.
+
+## Repository rules
+
+<!-- Add the project's build, test, security, branch, and release rules here. -->

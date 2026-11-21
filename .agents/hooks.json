@@ -1,0 +1,24 @@
+{
+  "agy-harness-safety": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/block-destructive.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/protect-secrets.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
