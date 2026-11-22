@@ -5,7 +5,7 @@ Google Antigravity(`agy` CLI, Antigravity App, IDE)의 기본 동작을 덮어�
 ## 구성
 
 - 커스텀 서브에이전트 6개 (`.agents/agents/`): `explorer`, `planner`, `coder`, `tester`, `reviewer`, `documenter`
-- 스킬 7개 (`.agents/skills/`): `plan`, `work`, `review`, `release`, `setup`, `orchestrator`, `pr-walkthrough`
+- 스킬 8개 (`.agents/skills/`): `plan`, `work`, `review`, `release`, `setup`, `orchestrator`, `pr-walkthrough`, `frontend-design`
 - 안전 훅 2개 (`.agents/hooks/` + `.agents/hooks.json`): 파괴적 명령 차단, 비밀 파일 쓰기 차단
 - 설치기 (`scripts/install.py`): 정본을 전역 `~/.gemini/config`에 심볼릭 링크하고 `hooks.json`의 `agy-harness-safety`만 안전하게 병합
 
@@ -23,6 +23,7 @@ plan → work → review → release
 - `work`: 승인된 Phase 하나를 작게 구현합니다. `tester`는 필요할 때만 사용합니다.
 - `review`: 스펙, 보안, 정확성·유지보수성, 성능·운영성의 네 관점을 한 번 검토합니다.
 - `pr-walkthrough`: 사람 리뷰어를 위한 읽기 전용 PR/브랜치 워크스루 아티팩트(TL;DR, Mermaid 흐름도, 가이드 투어, 위험 핫스팟)를 생성합니다. PR 코멘트는 명시적으로 요청할 때만 게시합니다.
+- `frontend-design`: AI 특유의 뻔한 템플릿을 피하고 의도적인 시각적 방향·타이포그래피·팔레트로 웹 UI를 설계/개선합니다(`anthropics/skills`, Apache-2.0).
 - `release`: 사용자가 명시적으로 요청했을 때만 문서·커밋·푸시·PR을 준비합니다.
 - `orchestrator`: 비단순 작업의 전체 흐름과 수정·재리뷰를 조율합니다. 최초 리뷰를 포함해 최대 3회만 수행합니다.
 

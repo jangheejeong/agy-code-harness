@@ -13,7 +13,16 @@ AGENTS = {
     "explorer": ("gemini-4-argon-medium", "sandbox"),
     "documenter": ("gemini-4-argon-low", "off"),
 }
-SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator", "pr-walkthrough")
+SKILLS = (
+    "plan",
+    "work",
+    "review",
+    "release",
+    "setup",
+    "orchestrator",
+    "pr-walkthrough",
+    "frontend-design",
+)
 
 
 def frontmatter(path):
@@ -126,8 +135,10 @@ class ContractTests(unittest.TestCase):
             "3",
             "~/.gemini/config",
             "pr-walkthrough",
+            "frontend-design",
         ):
             self.assertIn(expected, source)
+        self.assertTrue((ROOT / ".agents/skills/frontend-design/LICENSE.txt").is_file())
         self.assertLessEqual(len((ROOT / "README.md").read_text().splitlines()), 110)
         self.assertLessEqual(len((ROOT / "HARNESS.md").read_text().splitlines()), 150)
 

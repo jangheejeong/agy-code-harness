@@ -13,7 +13,16 @@ from typing import Dict, List, Optional, Tuple
 
 
 AGENTS = ("explorer", "planner", "coder", "tester", "reviewer", "documenter")
-SKILLS = ("plan", "work", "review", "release", "setup", "orchestrator", "pr-walkthrough")
+SKILLS = (
+    "plan",
+    "work",
+    "review",
+    "release",
+    "setup",
+    "orchestrator",
+    "pr-walkthrough",
+    "frontend-design",
+)
 SAFETY_HOOKS = ("block-destructive", "protect-secrets")
 HOOK_GROUP_NAME = "agy-harness-safety"
 

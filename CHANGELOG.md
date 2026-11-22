@@ -10,3 +10,4 @@
 - 사람 리뷰어용 읽기 전용 PR/브랜치 워크스루 스킬(`pr-walkthrough`, 총 7개 스킬)과 `references/walkthrough-template.md` 템플릿을 추가했습니다.
 - `scripts/install.py`의 `exact_skill_dir_match`를 재귀적 비심볼릭 트리 및 SHA-256 해시 검증으로 확장해 다중 파일 스킬 디렉터리의 안전한 정리와 충돌 차단을 지원합니다.
 - `coder` 및 `reviewer` 에이전트에 SLAP(단일 추상화 수준)·Stepdown Rule 기반 가독성 지침(과잉 추상화 방지 포함)을 추가했습니다.
+- `anthropics/skills`의 `frontend-design` 스킬(`.agents/skills/frontend-design/`, Apache-2.0, 순수 Markdown, 총 8개 스킬)을 추가했습니다.

@@ -51,7 +51,7 @@ class InstallTests(unittest.TestCase):
         first_bytes = hooks_path.read_bytes()
         second = self.install(workspace=False)
 
-        self.assertEqual(first["links_updated"], 15)
+        self.assertEqual(first["links_updated"], 16)
         self.assertEqual(first["hooks_config_updated"], 1)
         self.assertEqual(second["links_updated"], 0)
         self.assertEqual(second["hooks_config_updated"], 0)
@@ -67,6 +67,10 @@ class InstallTests(unittest.TestCase):
         self.assertEqual(
             (self.global_root / "skills/review").resolve(),
             ROOT / ".agents/skills/review",
+        )
+        self.assertEqual(
+            (self.global_root / "skills/frontend-design/LICENSE.txt").resolve(),
+            ROOT / ".agents/skills/frontend-design/LICENSE.txt",
         )
         self.assertEqual(
             (self.global_root / "skills/pr-walkthrough/references/walkthrough-template.md").resolve(),
@@ -148,7 +152,7 @@ class InstallTests(unittest.TestCase):
         result = self.install(workspace=True, dry_run=True)
 
         self.assertTrue(result["dry_run"])
-        self.assertEqual(result["links_updated"], 15)
+        self.assertEqual(result["links_updated"], 16)
         self.assertEqual(result["hooks_config_updated"], 1)
         self.assertEqual(result["backups"], [])
         self.assertEqual(hooks_path.read_text(), original)

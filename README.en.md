@@ -5,7 +5,7 @@ A lightweight personal harness for Google Antigravity (`agy` CLI, Antigravity Ap
 ## Components
 
 - 6 custom subagents (`.agents/agents/`): `explorer`, `planner`, `coder`, `tester`, `reviewer`, `documenter`
-- 7 skills (`.agents/skills/`): `plan`, `work`, `review`, `release`, `setup`, `orchestrator`, `pr-walkthrough`
+- 8 skills (`.agents/skills/`): `plan`, `work`, `review`, `release`, `setup`, `orchestrator`, `pr-walkthrough`, `frontend-design`
 - 2 safety hooks (`.agents/hooks/` + `.agents/hooks.json`): destructive shell command guard and secret-file write guard
 - Installer (`scripts/install.py`): symlinks canonical assets into `~/.gemini/config` and safely merges only the `agy-harness-safety` block into `hooks.json`
 
@@ -23,6 +23,7 @@ plan → work → review → release
 - `work`: Implements one approved phase with a focused diff (`tester` is optional).
 - `review`: Runs one independent read-only pass across four lenses (spec, security, correctness/maintainability, performance/operability).
 - `pr-walkthrough`: Builds a read-only Antigravity Markdown Artifact (TL;DR, Mermaid flow diagram, guided tour, risk hotspots) to help human reviewers understand a PR or local branch diff; posts `gh pr comment` only when explicitly requested.
+- `frontend-design`: Guides distinctive, intentional visual design, typography, and palettes for web UIs to avoid generic AI templates (adapted from `anthropics/skills`, Apache-2.0).
 - `release`: Prepares docs, commit, push, or PR only on explicit user request.
 - `orchestrator`: Coordinates end-to-end work and at most 3 review attempts including the first.
 
